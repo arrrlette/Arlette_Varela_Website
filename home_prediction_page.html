@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Home Price Prediction Model</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 jumbotron text-center"  style="background-image: url('assets/img/apex.jpg');">
+                <h1 style="color: white;">Home Price Prediction Model</h1>
+                <p style="color: white;">Thank you for visiting!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <p><h4>What is my house worth?</h4></p>
+            <p><strong>In this project, we sought out to predict townhome and single-family home prices in Apex, NC based on square-footage, bedrooms, bathrooms, and a few other things that make a house unique.</strong></p>
+        </div>
+
+        <div class="row">
+            <p> 
+            Tools: We created a machine learning model utilizing Python, Jupyter Notebooks, and the Tensorflow/Scikit libraries. We also utilized HTML, Javascript/CSS, Flask, and Tableau. <br>
+            Dataset Used: MLS Triangle Area<br>
+            Team: Arlette Varela, Nathan Bolt, Alexandra Taft, Anthony English, Nirupama Shankar 
+            </p>
+        </div>
+
+        <div class="row">
+            <p><h4>Questions:</h4></p>
+        </div>
+
+        <div class="row">
+            <p>
+                1. Primary Question: What is my house worth based on selected elements?<br>
+                2. Secondary Question 1: Is there a better time of the year to sell my house? <br>
+                3. Secondary Question 2: Can we forecast home prices in Apex for 2021?
+            </p>
+        </div>
+
+        <div class="row">
+            <p><h4>Process Summary:</h4>
+            </p>
+        </div>
+
+        <div class="row">
+            <p>
+                <strong>Data Clean-up:</strong> Utilized python and tableau to identifity any outliers (such as a home that "sold" for $1.00) and clean the data.
+            </p>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <img class="zoom" src="assets/img/apex_homes/cleaning.jpg" style="width:100%" alt="cleaning">
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="row">
+            <strong>Machine Learning Model Selection:</strong>
+        </div>
+
+        <div class = "row">
+            <ul>
+                <li>Considered various models such as random forest, SVC, etc.</li>
+                <li>Utilized tensorflow sequential because of our number of predictors and need for a numerical outcome.</li>
+                <li>Chose MeanAbsoluteError to measure our loss because it was a predictive model.</li>
+                <li>Built two models, one for single family homes and one for townhomes.</li>
+            </ul>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <img class="zoom" src="assets/img/apex_homes/machine_learning.jpg" style="width:100%" alt="machine_learning">
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="row">
+            <strong>Machine Learning Inputs:</strong>
+        </div>
+
+        <div class = "row">
+            <ul>
+                <li>We had 9 inputs we used from our data to train our model. Most were numerical already, but we did have to convert Subdivision to a numerical value using label encoder. </li>
+                <li>Then we had to normalize all of our data inputs to be between 0 -1 to work with the MSE loss function in our model</li>
+                <li>Below you can see an example of our code that normalized all of our input values before running through the model</li>
+            </ul>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <img class="zoom" src="assets/img/apex_homes/normalize_data.jpg" style="width:50%" alt="normalize_data">
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="row">
+            <strong>Model Accuracy:</strong>
+        </div>
+
+        <div class="container">
+
+            <div class = "row">
+                <ul>
+                    <li>R-Square Value/Mean quare Error: Homes/MSE: 0.818/0.006 and Townhomes/MSE: 0.858/0.005 </li>
+                    <li>Model Loss: the objective that the model will try to minimize.</li>
+                </ul>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <img class="zoom" src="assets/img/apex_homes/model_loss.jpg" style="width:100%" alt="model_loss">
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <img class="zoom" src="assets/img/apex_homes/Rsquared.jpg" style="width:100%" alt="Rsquared">
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="row">
+            <strong>Connecting the back-end too the front-end:</strong>
+        </div>
+
+        <div class = "row">
+            <ul>
+                <li>Utilized D3 to grab user input and build route url. </li>
+                <li>Two routes set in app.py: one for single family homes and one for townhomes.</li>
+                <li>Each ran the input through a different model.</li>
+                <li>When user selects type of home and selects attributes, route is hit and input is run through respective model, returning predicted value.</li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <img class="zoom" src="assets/img/apex_homes/approute.jpg" style="width:100%" alt="approute">
+            </div>
+        </div>
+
+        <br><br>
+        
+
+
+        <div class="row">
+            <strong>Tableau:</strong>
+        </div>
+
+        <div class = "row">
+            <p>Utilized Tableau to answer our secondary questions: 1) Is there a better time of the year to sell my house? and 2) Can we forecast home prices in Apex for 2021?</p>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <img class="zoom" src="assets/img/apex_homes/tableau_avgzip.jpg" style="width:100%" alt="model_loss">
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <img class="zoom" src="assets/img/apex_homes/tableau_splp.jpg" style="width:100%" alt="Rsquared">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <img class="zoom" src="assets/img/apex_homes/tableau_dom.jpg" style="width:100%" alt="model_loss">
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <img class="zoom" src="assets/img/apex_homes/tableau_homesize.jpg" style="width:100%" alt="Rsquared">
+            </div>
+        </div>
+
+
+        <br><br>
+
+        <div class="row">
+            <h4>Website:</h4>
+        </div>
+
+        <div class="container">
+
+            <div class = "row">
+                Landing Page: Navigation bar consists of Home, Prediction, Tableau Views, and Team sections.
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-md-1 col-sm-12"></div>
+                <div class="col-md-6 col-sm-12">
+                    <img class="zoom" src="/assets/img/apex_homes/website_home.jpg" style="width:150%" alt="website_home">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+
+            <div class = "row">
+                Prediction Section: User selects input, including type of home (single family or townhome) and subdivision.
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-md-1 col-sm-12"></div>
+                <div class="col-md-6 col-sm-12">
+                    <img class="zoom" src="/assets/img/apex_homes/website_prediction.jpg" style="width:150%" alt="website_prediction">
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="container">
+
+            <div class = "row">
+                Prediction Results: Once user clicks "Predict Price", the script will run user input through the model and produce a predicted price.
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-md-1 col-sm-12"></div>
+                <div class="col-md-6 col-sm-12">
+                    <img class="zoom" src="/assets/img/apex_homes/website_prediction_results.jpg" style="width:150%" alt="website_prediction_results">
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="container">
+
+            <div class = "row">
+                Tableau Visualizations: You are able to select from 4 graphs for each type of home (Avg price per zipcode, Sales Price/List Price, Days on Market, and Home Size)
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-md-1 col-sm-12"></div>
+                <div class="col-md-6 col-sm-12">
+                    <img class="zoom" src="/assets/img/apex_homes/website_tableau_visualizations.jpg" style="width:150%" alt="website_tableau_visualizations">
+                </div>
+            </div>
+        </div>
+
+
+        
+        <div class="row">
+            <h4>Conclusion:</h4>
+        </div>
+
+        <div class = "row">
+            <p>
+                In this project, we were able to successfully build a machine learning model that predicts the values of your home in Apex, NC with an 80-85% accuracy rate. 
+                As far as the secondary questions, we utilized tableau to determine that seasonality is a factor you must consider when selling your home as well as to predict future home prices based on previous trends.
+            </p>
+
+        </div>
+
+            
+    </div>
+
+
+
+
+
+
+
+</body>
